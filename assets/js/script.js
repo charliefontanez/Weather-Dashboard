@@ -28,6 +28,14 @@ for (let i = 0; i < 8; i++) {
 // }
 
 
+var formSubmitHandler = function(e) {
+  e.preventDefault();
+  console.log(e);
+  var date = moment().subtract(10, 'days').calendar();
+  getData(date);
+}
+
+
 
 
 var getWeatherData = function (lat, long) {
@@ -58,14 +66,15 @@ var displayCurrentWeather = function (weatherData) {
 
 
 
-var getData = function(e) {
-  e.preventDefault();
-  console.log(e);
-
-  city = cityInputEl.value;
+var getData = function(date) {
+  city = cityInputEl.value.trim();
+  
 
   var coordinateApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=709cd6f20260c1a83a27ae8068f9a762";
 
+  console.log($("#todays-city").text());
+  $("#todays-city").text(city + ' (' + date + ')');
+  console.log($("#todays-city").text());
   
 
   fetch(coordinateApiUrl).then(function(data) {
@@ -79,4 +88,4 @@ var getData = function(e) {
   });
 };
 
-searchFormEl.addEventListener("submit", getData);
+searchFormEl.addEventListener("submit", formSubmitHandler);
