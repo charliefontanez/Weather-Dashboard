@@ -97,16 +97,16 @@ form {
   border: solid 1px black;
 }
 
+.box p {
+  padding-top: 5px;
+}
+
 .forecast {
   position: relative;
   top: 10px;
   left: 10px;
   width:auto;
 }
-
-/* .forecast h2 {
-  
-} */
 
 .forecast-card {
   height: 210px;
