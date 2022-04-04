@@ -15,5 +15,5 @@ https://charliefontanez.github.io/Weather-Dashboard/
 - Moment.js
 - Bootstrap
 - jQuery
-- OpenWeatherMap Geolocater API
+- OpenWeatherMap Geocoding API
 - OpneWeatherMap One Call API
