@@ -97,6 +97,10 @@ form {
   border: solid 1px black;
 }
 
+.todays-weather h2 {
+  height: 39px;
+}
+
 .todays-weather p {
   padding-top: 5px;
 }

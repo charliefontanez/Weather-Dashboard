@@ -4,16 +4,15 @@ var searchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector("#city-input");
 var fiveDayEl = document.getElementById("five-day-forecast");
 var city = "";
-
-
-const quickSearches = ["", "", "", "", "", "", "", ""];
+var validCity = false;
+var searchCount = 0;
 
 for (let i = 0; i < 8; i++) {
   var secondaryBtn = document.createElement("button");
   secondaryBtn.style.display = "block";
   secondaryBtn.classList.add("btn");
   secondaryBtn.classList.add("btn-secondary");
-  secondaryBtn.innerHTML = "   ";
+  secondaryBtn.innerHTML = "";
   // secondaryBtn.setAttribute("type", "button");
   // secondaryBtn.setAttribute("value", "San Fransisco");
   searchBtnContainer.append(secondaryBtn);
@@ -31,18 +30,18 @@ for (let i = 0; i < 8; i++) {
 var formSubmitHandler = function(e) {
   e.preventDefault();
   city = cityInputEl.value.trim();
+  
+  
+  getCoordinateData();
 
-  var validCity = false;
-  validCity = getCoordinateData();
-
-  if (validCity == true) {
-    cityInputEl.value = "";
-    getWeatherData(lat, long);
-  }
-  else {
-    cityInputEl.value = ""
-    console.log("Invalid City");
-  }
+  // if (validCity == true) {
+  //   cityInputEl.value = "";
+  //   getWeatherData(lat, long);
+  // }
+  // else {
+  //   cityInputEl.value = ""
+  //   console.log("Invalid City");
+  // }
 }
 
 
@@ -89,27 +88,26 @@ var displayCurrentWeather = function (weatherData) {
 }
 
 
-
-var getCoordinateData = function(validCity) {
-
-  var coordinateApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=709cd6f20260c1a83a27ae8068f9a762";
-
-  fetch(coordinateApiUrl).then(function(response) {
+// Gets coordinate Data for Onecall API
+var getCoordinateData = function(validCity) { 
+  fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=709cd6f20260c1a83a27ae8068f9a762")
+.then(function(response) {
     if (response.ok) {
       console.log($("#todays-city").text());
+      console.log(response);
       response.json().then(function(data) {
         console.log(data[0]);
         lat = data[0].lat;
         long = data[0].lon;
+        cityInputEl.value = "";
+        getWeatherData(lat, long);
       });
-      return true;
     } 
     else {
       console.log("Invalid City");
-      return false;
     }
   });
-};
+}
 
 // coordinate data for Onecall API
 var lat = 0;
