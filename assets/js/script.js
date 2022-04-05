@@ -1,10 +1,22 @@
+var recentSearches = [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+]
+
+
+
 var searchBtnContainer = $(".search-buttons");
 var submitBtn = document.querySelector("#input-city-btn");
 var searchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector("#city-input");
 var fiveDayEl = document.getElementById("five-day-forecast");
 var city = "";
-var validCity = false;
 var searchCount = 0;
 
 for (let i = 0; i < 8; i++) {
@@ -93,12 +105,11 @@ var getCoordinateData = function(validCity) {
   fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=709cd6f20260c1a83a27ae8068f9a762")
 .then(function(response) {
     if (response.ok) {
-      console.log($("#todays-city").text());
-      console.log(response);
       response.json().then(function(data) {
         console.log(data[0]);
         lat = data[0].lat;
         long = data[0].lon;
+        localStorage.setItem()
         cityInputEl.value = "";
         getWeatherData(lat, long);
       });
