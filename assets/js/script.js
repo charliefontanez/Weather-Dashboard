@@ -1,4 +1,5 @@
-var recentSearches = [
+var recentSearches = JSON.parse(localStorage.getItem("SearchHistory")) 
+|| [
   "",
   "",
   "",
@@ -7,8 +8,26 @@ var recentSearches = [
   "",
   "",
   "",
-]
+];
 
+// if (localStorage.getItem("SearchHistory") !== null) {
+//   recentSearches = JSON.parse(localStorage.getItem("SearchHistory"));  
+// }
+// else {
+//   recentSearches = [
+//     "",
+//     "",
+//     "",
+//     "",
+//     "",
+//     "",
+//     "",
+//     "",
+//   ]
+// }
+
+
+console.log(recentSearches);
 
 // for (i = 0; i < recentSearches.length; i++) {
 //   recentSearches[i] = city;
@@ -32,7 +51,7 @@ for (let i = 0; i < 8; i++) {
   secondaryBtn.classList.add("btn");
   secondaryBtn.classList.add("btn-secondary");
   secondaryBtn.setAttribute("id", i.toString());
-  secondaryBtn.innerHTML = "";
+  secondaryBtn.innerHTML = recentSearches[i];
   // secondaryBtn.setAttribute("type", "button");
   // secondaryBtn.setAttribute("value", "San Fransisco");
   searchBtnContainer.append(secondaryBtn);
@@ -43,6 +62,7 @@ for (let i = 0; i < 8; i++) {
 
 var formSubmitHandler = function(e) {
   e.preventDefault();
+  console.dir(e);
   city = cityInputEl.value.trim();
 
   if (recentSearches[0] == "") {
@@ -58,6 +78,8 @@ var formSubmitHandler = function(e) {
       }
     }
   }
+
+  localStorage.setItem("SearchHistory", JSON.stringify(recentSearches));
   
   getCoordinateData();
 
@@ -71,7 +93,12 @@ var formSubmitHandler = function(e) {
   // }
 }
 
-
+var buttonSubmitHandler = function(e) {
+  e.preventDefault();
+  // city = cityInputEl.value.trim();
+  city = e.target.innerText;
+  getCoordinateData();
+}
 
 
 var getWeatherData = function (lat, long) {
@@ -140,3 +167,5 @@ var lat = 0;
 var long = 0;
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
+
+$(".search-buttons").on("click", buttonSubmitHandler);
