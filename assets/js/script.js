@@ -10,6 +10,13 @@ var recentSearches = [
 ]
 
 
+// for (i = 0; i < recentSearches.length; i++) {
+//   recentSearches[i] = city;
+//   if (recentSearches.length > 8) {
+//     break;
+//   }
+// }
+
 
 var searchBtnContainer = $(".search-buttons");
 var submitBtn = document.querySelector("#input-city-btn");
@@ -24,6 +31,7 @@ for (let i = 0; i < 8; i++) {
   secondaryBtn.style.display = "block";
   secondaryBtn.classList.add("btn");
   secondaryBtn.classList.add("btn-secondary");
+  secondaryBtn.setAttribute("id", i.toString());
   secondaryBtn.innerHTML = "";
   // secondaryBtn.setAttribute("type", "button");
   // secondaryBtn.setAttribute("value", "San Fransisco");
@@ -31,18 +39,25 @@ for (let i = 0; i < 8; i++) {
   // console.log(secondaryBtn);
 }
 
-// for (let i = 1; i < 6; i++) {
-//   var forecastCardEl = document.createElement("div");
-//   forecastCardEl.setAttribute("id", "forecast-card-" + i);
-
-
-// }
 
 
 var formSubmitHandler = function(e) {
   e.preventDefault();
   city = cityInputEl.value.trim();
-  
+
+  if (recentSearches[0] == "") {
+    recentSearches[0] = city;
+    console.log(recentSearches);
+  }
+  else {
+    for (i = 7; i >= 0; i--) {
+      recentSearches[i] = recentSearches[i - 1];
+      if (i == 0) {
+        recentSearches[0] = city;
+        console.log(recentSearches);
+      }
+    }
+  }
   
   getCoordinateData();
 
@@ -101,7 +116,7 @@ var displayCurrentWeather = function (weatherData) {
 
 
 // Gets coordinate Data for Onecall API
-var getCoordinateData = function(validCity) { 
+var getCoordinateData = function() { 
   fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=709cd6f20260c1a83a27ae8068f9a762")
 .then(function(response) {
     if (response.ok) {
@@ -109,13 +124,13 @@ var getCoordinateData = function(validCity) {
         console.log(data[0]);
         lat = data[0].lat;
         long = data[0].lon;
-        localStorage.setItem()
         cityInputEl.value = "";
         getWeatherData(lat, long);
       });
+
     } 
     else {
-      console.log("Invalid City");
+      console.log("invalid city")
     }
   });
 }
