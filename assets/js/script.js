@@ -131,7 +131,7 @@ var setForecastData = function (weatherData) {
     forecastIconEl.attr("width", "100");
     $("#forecast-day-" + i).find(".forecast-temp").text(("Temp: " + weatherData.daily[i - 1].temp.day + "°F"));
     $("#forecast-day-" + i).find(".forecast-wind").text("Wind: " + (weatherData.daily[i - 1].wind_speed + " MPH"));
-    $("#forecast-day-" + i).find(".forecast-humidity").text("Humidity " + (weatherData.daily[i - 1].humidity + " %"));
+    $("#forecast-day-" + i).find(".forecast-humidity").text("Humidity: " + (weatherData.daily[i - 1].humidity + " %"));
   }
 }
 
