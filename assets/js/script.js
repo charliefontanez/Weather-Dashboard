@@ -102,8 +102,9 @@ var buttonSubmitHandler = function(e) {
 
 
 var getWeatherData = function (lat, long) {
-  var date = moment().format("MM/DD/YYYY");
-  $("#todays-city").text(city + ' (' + date + ')');
+  
+
+  console.log("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&units=imperial&exclude=minutely,hourly&appid=709cd6f20260c1a83a27ae8068f9a762");
 
   fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&units=imperial&exclude=minutely,hourly&appid=709cd6f20260c1a83a27ae8068f9a762")
   .then(function(response) {
@@ -117,11 +118,17 @@ var getWeatherData = function (lat, long) {
 
 var setForecastData = function (weatherData) {
   console.log(weatherData);
+
   for (let i = 1; i < 6; i++) {
     // let forecastCard = $("#forecast-day-" + i);
     // console.log(forecastCard);
+    var forecastIconEl = $("#forecast-day-" + i).find("#forecast-img-" + i);
+    var forecastIconSrc = "https://openweathermap.org/img/wn/" + weatherData.daily[i - 1].weather[0].icon + "@2x.png"
     var forecastDate = moment().add((i).toString(), "days").format("MM/DD/YYYY");
     $("#forecast-day-" + i).find(".forecast-card-date").text(forecastDate);
+    forecastIconEl.attr("src", forecastIconSrc);
+    forecastIconEl.attr("height", "100");
+    forecastIconEl.attr("width", "100");
     $("#forecast-day-" + i).find(".forecast-temp").text(("Temp: " + weatherData.daily[i - 1].temp.day + "°F"));
     $("#forecast-day-" + i).find(".forecast-wind").text("Wind: " + (weatherData.daily[i - 1].wind_speed + " MPH"));
     $("#forecast-day-" + i).find(".forecast-humidity").text("Humidity " + (weatherData.daily[i - 1].humidity + " %"));
@@ -130,6 +137,16 @@ var setForecastData = function (weatherData) {
 
 var displayCurrentWeather = function (weatherData) {
   // console.log(weatherData);
+  var todaysWeatherIcon = document.createElement("img");
+  todaysWeatherIcon.src = "https://openweathermap.org/img/wn/" + weatherData.current.weather[0].icon + "@2x.png";
+  todaysWeatherIcon.height = "80";
+  todaysWeatherIcon.width = "80";
+  var date = moment().format("MM/DD/YYYY");
+  var todaysCity = document.getElementById("todays-city");
+  todaysCity.innerText = city + ' (' + date + ') ';
+  todaysCity.appendChild(todaysWeatherIcon);
+
+
   let currentTempEl = document.getElementById("todays-temp");
   let currentWindEl = document.getElementById("todays-wind");
   console.log(currentWindEl);
@@ -138,7 +155,18 @@ var displayCurrentWeather = function (weatherData) {
   currentTempEl.innerHTML = weatherData.current.temp + "°F";
   currentWindEl.innerHTML = weatherData.current.wind_speed;
   currentHumidityEl.innerHTML = weatherData.current.humidity + " %";
-  currentUVIndexEl.innerHTML = weatherData.current.uvi;
+  let uvIndex = weatherData.current.uvi
+  currentUVIndexEl.innerHTML = uvIndex;
+  if (uvIndex < 3.4) {
+    console.dir(currentUVIndexEl);
+    currentUVIndexEl.style.backgroundColor = "green";
+  }
+  else if (uvIndex , 6.4) {
+    currentUVIndexEl.style.backgroundColor = "orange";
+  }
+  else {
+    currentUVIndexEl.style.backgroundColor = "red";
+  }
 }
 
 

@@ -16,8 +16,8 @@
   </h1></a>
   </header>
 
-  <div class=".container-fluid main row">
-    <div id="search" class="col-4">
+  <div class="container-fluid main row">
+    <div id="search" class="col-3">
       <form id="search-form" class="d-flex flex-column">
         <label for="city-input">Search for a City: </label>
         <input id="city-input" name="city-input"  type="text" placeholder="City">
@@ -27,49 +27,49 @@
       <div class="search-buttons"></div>
     </div>
 
-    <div class="col-8">
-      <div class="todays-weather">
+    <div class="col-9">
+      <div class="todays-weather d-flex flex-column">
         <h2 id="todays-city"></h2>
         <p>Temp: <span id="todays-temp"></span></p>
-        <p >Wind: <span id="todays-wind"></span> MPH</p>
+        <p>Wind: <span id="todays-wind"></span> MPH</p>
         <p>Humidity: <span id="todays-humidity"></span></p>
         <p>UV Index: <span id="todays-uv-index"></span></p>
       </div>
 
       <div class="forecast">
         <h2>5-Day Forecast:</h2>
-        <div id="five-day-forecast" class="d-flex flex-row">
+        <div id="five-day-forecast" class="d-flex flex-row justify-content-between">
           <div id="forecast-day-1" class="forecast-card">
             <p class="forecast-card-date">Date</p>
-            <i class="bi bi-cloud-rain"></i>
+            <img id="forecast-img-1">
             <p class="forecast-temp">Temp: </p>
             <p class="forecast-wind">Wind: MPH</p>
             <p class="forecast-humidity">Humidity: %</p>
           </div>
           <div id="forecast-day-2" class="forecast-card ">
             <p class="forecast-card-date">Date</p>
-            <i class="bi bi-cloud-rain"></i>
+            <img id="forecast-img-2">
             <p class="forecast-temp">Temp: </p>
             <p class="forecast-wind">Wind: MPH</p>
             <p class="forecast-humidity">Humidity: %</p>
           </div>
           <div id="forecast-day-3" class="forecast-card ">
             <p class="forecast-card-date">Date</p>
-            <i class="bi bi-cloud-rain"></i>
+            <img id="forecast-img-3">
             <p class="forecast-temp">Temp: </p>
             <p class="forecast-wind">Wind: MPH</p>
             <p class="forecast-humidity">Humidity: %</p>
           </div>
           <div id="forecast-day-4" class="forecast-card ">
             <p class="forecast-card-date">Date</p>
-            <i class="bi bi-cloud-rain"></i>
+            <img id="forecast-img-4">
             <p class="forecast-temp">Temp: </p>
             <p class="forecast-wind">Wind: MPH</p>
             <p class="forecast-humidity">Humidity: %</p>
           </div>
           <div id="forecast-day-5" class="forecast-card ">
             <p class="forecast-card-date">Date</p>
-            <i class="bi bi-cloud-rain"></i>
+            <img id="forecast-img-5">
             <p class="forecast-temp">Temp: </p>
             <p class="forecast-wind">Wind: MPH</p>
             <p class="forecast-humidity">Humidity: %</p>
