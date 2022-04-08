@@ -1,6 +1,8 @@
 # Weather Dashboard
 
 
+![image](./assets/images/weather_dashboard.png)
+
 
 ## Link to Live Page
 
